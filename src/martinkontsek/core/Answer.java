@@ -8,22 +8,25 @@ public class Answer
 {
     private float aFraction;
     private String aText;
+    private boolean aIsRight;
 
     public Answer() 
     {
-        
+        aIsRight = false;
     }
     
     public Answer(float paFraction, String paText) 
     {
+        this();
         this.aFraction = paFraction;
         this.aText = paText;
     }
 
-    public Answer(int paNumberOfRight, boolean paIsRight, String paText) 
+    public Answer(int paNumberOfAnswers, int paNumberOfRight, boolean paIsRight, String paText) 
     {
+        aIsRight = paIsRight;
         this.aText = paText;
-        this.setFraction(paNumberOfRight, paIsRight);
+        this.setFraction(paNumberOfAnswers, paNumberOfRight);
     }     
 
     public float getFraction() 
@@ -36,20 +39,26 @@ public class Answer
         this.aFraction = paFraction;
     }
     
-    public void setFraction(int paNumberOfRight, boolean paIsRight)
+    public void setFraction(int paNumberOfAnswers, int paNumberOfRight)
     {
         if(paNumberOfRight == 1)
         {
-            if(paIsRight)
+            if(aIsRight)
                 aFraction = 100;
             else
                 aFraction = 0;
         } else {
-            float fraction = 100/paNumberOfRight;
-            if(paIsRight)
-                aFraction = fraction;
+            float fractionRight;
+            if(paNumberOfRight < 1)
+                fractionRight = 0;
             else
-                aFraction = fraction*(-1);
+                fractionRight = 100/paNumberOfRight;
+            
+            float fractionWrong = 100/(paNumberOfAnswers - paNumberOfRight);
+            if(aIsRight)
+                aFraction = fractionRight;
+            else
+                aFraction = fractionWrong*(-1);
         }      
     }
 

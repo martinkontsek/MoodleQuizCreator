@@ -10,7 +10,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -52,6 +51,14 @@ public class Quiz
     public void addQuestion(Question paQuestion)
     {
         aQuestions.add(paQuestion);
+    }
+    
+    public Question addQuestion(QuestionTypeEnum paQuestionType)
+    {
+        Question question = new Question(paQuestionType);
+        aQuestions.add(question);
+        
+        return question;
     }
 
     public void saveToXML()
@@ -102,17 +109,23 @@ public class Quiz
                         answer.appendChild(answerText);
                     }
                     
-                }
-                
-//              // staff elements
-//		Element staff = doc.createElement("Staff");
-//		rootElement.appendChild(staff);
-//		staff.setAttribute("id", "1");
-// 
-//		// firstname elements
-//		Element firstname = doc.createElement("firstname");
-//		firstname.appendChild(doc.createTextNode("yong"));
-//		staff.appendChild(firstname);
+                    if(fQuestion.getQuestionType() == QuestionTypeEnum.MULTICHOICE)
+                    {
+                        // shuffle answers
+                        Element shuffle = doc.createElement("shuffleanswers");
+                        question.appendChild(shuffle);
+                        shuffle.appendChild(doc.createTextNode("1"));
+                        
+                        // single or multiple right answers
+                        Element single = doc.createElement("single");
+                        question.appendChild(single);
+                        if(fQuestion.isSingleRight())
+                            single.appendChild(doc.createTextNode("true"));
+                        else
+                            single.appendChild(doc.createTextNode("false"));
+                    }
+                    
+                }               
 		
  
 		// write the content into xml file
@@ -126,7 +139,6 @@ public class Quiz
  
 		transformer.transform(source, result);
  
-		System.out.println("File saved!");
  
 	  } catch (ParserConfigurationException pce) {
 		pce.printStackTrace();
