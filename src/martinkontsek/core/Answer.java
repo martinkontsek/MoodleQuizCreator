@@ -71,6 +71,15 @@ public class Answer
     {
         this.aText = paText;
     }
-    
+
+    public boolean isRight() 
+    {
+        return aIsRight;
+    }
+
+    public void setIsRight(boolean paIsRight) 
+    {
+        this.aIsRight = paIsRight;
+    }    
     
 }

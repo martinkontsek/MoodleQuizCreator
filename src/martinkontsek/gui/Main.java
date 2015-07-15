@@ -1,18 +1,28 @@
 package martinkontsek.gui;
 
+import javax.swing.JTable;
 import martinkontsek.core.MoodleQuizCreator;
 
 /**
  *
  * @author Martin Kontsek
  */
-public class Main extends javax.swing.JFrame {
+public class Main extends javax.swing.JFrame 
+{
+    private MoodleQuizCreator aQuizCreator;
 
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
+        aQuizCreator = new MoodleQuizCreator(this);
+        
+    }
+    
+    public JTable getQuestionsTable()
+    {
+        return tabQuestions;
     }
 
     /**
@@ -25,12 +35,12 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabQuestions = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnNewQue = new javax.swing.JButton();
+        btnRemoveSelQue = new javax.swing.JButton();
+        btnExportQue = new javax.swing.JButton();
+        btnEditQue = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -40,11 +50,13 @@ public class Main extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Moodle Quiz Creator");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabQuestions.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -55,15 +67,30 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabQuestions);
 
-        jButton1.setText("New Question");
+        btnNewQue.setText("New Question");
+        btnNewQue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewQueActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Remove Selected");
+        btnRemoveSelQue.setText("Remove Selected");
 
-        jButton3.setText("Export to XML");
+        btnExportQue.setText("Export to XML");
+        btnExportQue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportQueActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Edit Question");
+        btnEditQue.setText("Edit Question");
+        btnEditQue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditQueActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -72,23 +99,23 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnRemoveSelQue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnNewQue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnExportQue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEditQue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jButton1)
+                .addComponent(btnNewQue)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(btnEditQue)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(btnRemoveSelQue)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(btnExportQue)
                 .addContainerGap(152, Short.MAX_VALUE))
         );
 
@@ -115,6 +142,10 @@ public class Main extends javax.swing.JFrame {
 
         jMenuItem6.setText("Remove Question");
         jMenu2.add(jMenuItem6);
+        jMenu2.add(jSeparator1);
+
+        jMenuItem7.setText("Edit Quiz Name");
+        jMenu2.add(jMenuItem7);
 
         jMenuBar1.add(jMenu2);
 
@@ -131,12 +162,24 @@ public class Main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnNewQueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewQueActionPerformed
+        aQuizCreator.addQuestion();
+    }//GEN-LAST:event_btnNewQueActionPerformed
+
+    private void btnEditQueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditQueActionPerformed
+        aQuizCreator.editQuestion();
+    }//GEN-LAST:event_btnEditQueActionPerformed
+
+    private void btnExportQueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportQueActionPerformed
+        aQuizCreator.exportToXML();
+    }//GEN-LAST:event_btnExportQueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,10 +217,10 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnEditQue;
+    private javax.swing.JButton btnExportQue;
+    private javax.swing.JButton btnNewQue;
+    private javax.swing.JButton btnRemoveSelQue;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -187,8 +230,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JTable tabQuestions;
     // End of variables declaration//GEN-END:variables
 }

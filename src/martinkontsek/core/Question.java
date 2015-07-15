@@ -16,17 +16,29 @@ public class Question
     private int aNumberOfAnswers;
     private int aNumberOfRight;
 
-    public Question(QuestionTypeEnum paQuestionType) 
+    public Question() 
     {
-        this.aQuestionType = paQuestionType;
+        this.aQuestionType = QuestionTypeEnum.TRUEFALSE;
+        
         aAnswers = new ArrayList<>();
         aNumberOfAnswers = 0;
         aNumberOfRight = 0;
+    } 
+    
+    public Question(QuestionTypeEnum paQuestionType) 
+    {
+        this();
+        this.aQuestionType = paQuestionType;
     }    
     
     public QuestionTypeEnum getQuestionType() 
     {
         return aQuestionType;
+    }
+    
+    public void setQuestionType(QuestionTypeEnum paQuestionType)
+    {
+        aQuestionType = paQuestionType;
     }
 
     public String getQuestionName() 
