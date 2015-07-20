@@ -11,7 +11,7 @@ import martinkontsek.core.Question;
 
 /**
  *
- * @author Martin
+ * @author Martin Kontsek
  */
 public class QuestionsTableModel extends AbstractTableModel
 {
@@ -22,6 +22,10 @@ public class QuestionsTableModel extends AbstractTableModel
         aQuestions = paQuestions;
     }
     
+    public void setQuestions(ArrayList<Question> paQuestions)
+    {
+        aQuestions = paQuestions;
+    }
 
     @Override
     public int getRowCount() 

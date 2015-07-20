@@ -21,6 +21,8 @@ public class Quiz
 {
     private String aName;
     private ArrayList<Question> aQuestions;
+    
+    private int aDBID;
 
     public Quiz() 
     {
@@ -60,6 +62,21 @@ public class Quiz
         
         return question;
     }
+    
+    public void removeQuestion(int paIndex)
+    {
+        aQuestions.remove(paIndex);
+    }
+
+    public int getDBID() 
+    {
+        return aDBID;
+    }
+
+    public void setDBID(int paDBID) 
+    {
+        this.aDBID = paDBID;
+    }   
 
     public void saveToXML()
     {

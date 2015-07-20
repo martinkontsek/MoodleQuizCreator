@@ -9,17 +9,23 @@
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="miSelectQuiz">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Select Quiz"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miSelectQuizActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+            <MenuItem class="javax.swing.JMenuItem" name="miNewQuiz">
               <Properties>
                 <Property name="text" type="java.lang.String" value="New Quiz"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miNewQuizActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+            <MenuItem class="javax.swing.JMenuItem" name="miRemoveQuiz">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Remove Quiz"/>
               </Properties>
@@ -83,7 +89,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jScrollPane1" pref="261" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="497" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
           </Group>
@@ -162,6 +168,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Remove Selected"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoveSelQueActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnExportQue">
           <Properties>

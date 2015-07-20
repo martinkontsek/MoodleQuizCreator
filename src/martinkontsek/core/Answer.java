@@ -9,6 +9,8 @@ public class Answer
     private float aFraction;
     private String aText;
     private boolean aIsRight;
+    
+    private int aDBID;
 
     public Answer() 
     {
@@ -82,4 +84,13 @@ public class Answer
         this.aIsRight = paIsRight;
     }    
     
+    public int getDBID() 
+    {
+        return aDBID;
+    }
+
+    public void setDBID(int paDBID) 
+    {
+        this.aDBID = paDBID;
+    }   
 }

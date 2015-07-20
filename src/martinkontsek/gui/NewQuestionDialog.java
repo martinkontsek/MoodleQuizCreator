@@ -242,6 +242,9 @@ public class NewQuestionDialog extends javax.swing.JDialog
         aQuestion.setQuestionName(questionName);
         aQuestion.setQuestionText(questionText);
         
+        if(aEditing)
+            aQuestion.removeAllAnswers();
+        
         for(int i=0; i < aTableModel.getRowCount(); i++)
         {
             String text = (String) aTableModel.getValueAt(i, 0);

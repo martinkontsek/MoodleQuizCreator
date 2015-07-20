@@ -15,6 +15,8 @@ public class Question
     private ArrayList<Answer> aAnswers;      
     private int aNumberOfAnswers;
     private int aNumberOfRight;
+    
+    private int aDBID;
 
     public Question() 
     {
@@ -92,4 +94,18 @@ public class Question
         aAnswers.add(answer);
     }
     
+    public void removeAllAnswers()
+    {
+        aAnswers.clear();
+    }
+    
+    public int getDBID() 
+    {
+        return aDBID;
+    }
+
+    public void setDBID(int paDBID) 
+    {
+        this.aDBID = paDBID;
+    }   
 }
