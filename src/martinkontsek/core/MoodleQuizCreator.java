@@ -1,5 +1,7 @@
 package martinkontsek.core;
 
+import java.awt.Desktop;
+import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -181,5 +183,31 @@ public class MoodleQuizCreator
         if(aSelectedQuiz == null)
             return;
         aSelectedQuiz.saveToXML();
+    }
+    
+    public void showAbout()
+    {
+        JOptionPane.showMessageDialog(aMain,
+            "Application is used for creating Moodle Quiz Questions.\n"
+            + "After exporting finished questions, Moodle XML is created in the\n"
+            + "current directory. Than you have to import questions from XML\n"
+            + "into Moodle Question Bank.\n"
+            + "\n"        
+            + "            created by Martin Kontsek in 2015",
+            "About",
+            JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public void showSources()
+    {
+        this.openWebpage("https://github.com/martinkontsek/MoodleQuizCreator");
+    }
+    
+    private void openWebpage(String urlString) 
+    {
+        try {
+            Desktop.getDesktop().browse(new URL(urlString).toURI());
+        } catch (Exception e) {
+        }
     }
 }

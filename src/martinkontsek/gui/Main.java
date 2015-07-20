@@ -53,6 +53,9 @@ public class Main extends javax.swing.JFrame
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         miEditQuizName = new javax.swing.JMenuItem();
         miExport = new javax.swing.JMenuItem();
+        mnHelp = new javax.swing.JMenu();
+        miSources = new javax.swing.JMenuItem();
+        miAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Moodle Quiz Creator");
@@ -205,6 +208,26 @@ public class Main extends javax.swing.JFrame
 
         jMenuBar1.add(mnQuiz);
 
+        mnHelp.setText("Help");
+
+        miSources.setText("Sources on GitHub");
+        miSources.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSourcesActionPerformed(evt);
+            }
+        });
+        mnHelp.add(miSources);
+
+        miAbout.setText("About");
+        miAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAboutActionPerformed(evt);
+            }
+        });
+        mnHelp.add(miAbout);
+
+        jMenuBar1.add(mnHelp);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -277,6 +300,14 @@ public class Main extends javax.swing.JFrame
         aQuizCreator.addQuestion();
     }//GEN-LAST:event_miNewQueActionPerformed
 
+    private void miAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAboutActionPerformed
+        aQuizCreator.showAbout();
+    }//GEN-LAST:event_miAboutActionPerformed
+
+    private void miSourcesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSourcesActionPerformed
+        aQuizCreator.showSources();
+    }//GEN-LAST:event_miSourcesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -321,6 +352,7 @@ public class Main extends javax.swing.JFrame
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenuItem miAbout;
     private javax.swing.JMenuItem miEditQue;
     private javax.swing.JMenuItem miEditQuizName;
     private javax.swing.JMenuItem miExport;
@@ -329,7 +361,9 @@ public class Main extends javax.swing.JFrame
     private javax.swing.JMenuItem miRemoveQue;
     private javax.swing.JMenuItem miRemoveQuiz;
     private javax.swing.JMenuItem miSelectQuiz;
+    private javax.swing.JMenuItem miSources;
     private javax.swing.JMenu mnFile;
+    private javax.swing.JMenu mnHelp;
     private javax.swing.JMenu mnQuiz;
     private javax.swing.JTable tabQuestions;
     // End of variables declaration//GEN-END:variables
