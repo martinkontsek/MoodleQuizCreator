@@ -3,6 +3,7 @@ package martinkontsek.core;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import martinkontsek.database.DatabaseManager;
 import martinkontsek.gui.Main;
 import martinkontsek.gui.NewQuestionDialog;
@@ -30,9 +31,15 @@ public class MoodleQuizCreator
         aQuizzes = null;
         aSelectedQuiz = null;
         
-        aQuestionsTable = aMain.getQuestionsTable();
+        aQuestionsTable = aMain.getQuestionsTable();        
+        aQuestionsTable.getTableHeader().setReorderingAllowed(false);        
         aTableModel = new QuestionsTableModel(new ArrayList<>());
         aQuestionsTable.setModel(aTableModel);
+        
+        aQuestionsTable.getColumnModel().getColumn(0).setMaxWidth(30);
+        aQuestionsTable.getColumnModel().getColumn(0).setResizable(false);
+        aQuestionsTable.getColumnModel().getColumn(3).setMaxWidth(60);
+        aQuestionsTable.getColumnModel().getColumn(3).setResizable(false);
     } 
     
     private void nullGUI()

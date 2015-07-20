@@ -45,6 +45,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="miNewQue">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+N"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="New Question"/>
               </Properties>
               <Events>
@@ -53,6 +56,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miEditQue">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+E"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Edit Question"/>
               </Properties>
               <Events>
@@ -115,7 +121,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jScrollPane1" pref="497" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="620" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
           </Group>

@@ -6,6 +6,7 @@
 package martinkontsek.gui;
 
 import java.util.ArrayList;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import martinkontsek.core.MoodleQuizCreator;
 import martinkontsek.core.Quiz;
@@ -28,6 +29,11 @@ public class SelectQuizDialog extends javax.swing.JDialog
         
         aQuizCreator = paQuizCreator;
         aTableModel = (DefaultTableModel) tabQuizzes.getModel();
+        
+        tabQuizzes.getTableHeader().setReorderingAllowed(false);
+        tabQuizzes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabQuizzes.getColumnModel().getColumn(0).setMaxWidth(30);
+        tabQuizzes.getColumnModel().getColumn(0).setResizable(false);
         aQuizzes = paQuizzes;
         
         for(int i=0; i < aQuizzes.size(); i++)
@@ -60,7 +66,7 @@ public class SelectQuizDialog extends javax.swing.JDialog
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false

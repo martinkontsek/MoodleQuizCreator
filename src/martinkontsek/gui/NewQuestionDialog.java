@@ -6,6 +6,7 @@
 package martinkontsek.gui;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import martinkontsek.core.Answer;
 import martinkontsek.core.MoodleQuizCreator;
@@ -35,6 +36,11 @@ public class NewQuestionDialog extends javax.swing.JDialog
         aQuizCreator = paQuizCreator;
         cbQueType.setModel(new DefaultComboBoxModel<>(QuestionTypeEnum.values()));
         aTableModel = (DefaultTableModel) tabAnswers.getModel();
+        
+        tabAnswers.getTableHeader().setReorderingAllowed(false);
+        tabAnswers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabAnswers.getColumnModel().getColumn(1).setMaxWidth(50);
+        tabAnswers.getColumnModel().getColumn(1).setResizable(false);
         
         if(paQuestion != null)
         {
