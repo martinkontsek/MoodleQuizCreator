@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import martinkontsek.database.DatabaseManager;
 import martinkontsek.gui.Main;
 import martinkontsek.gui.NewQuestionDialog;
@@ -35,7 +34,7 @@ public class MoodleQuizCreator
         
         aQuestionsTable = aMain.getQuestionsTable();        
         aQuestionsTable.getTableHeader().setReorderingAllowed(false);        
-        aTableModel = new QuestionsTableModel(new ArrayList<>());
+        aTableModel = new QuestionsTableModel(new ArrayList<Question>());
         aQuestionsTable.setModel(aTableModel);
         
         aQuestionsTable.getColumnModel().getColumn(0).setMaxWidth(30);
@@ -48,7 +47,7 @@ public class MoodleQuizCreator
     {
         aSelectedQuiz = null;
         aMain.setTitle("Moodle Quiz Creator");
-        aTableModel.setQuestions(new ArrayList<>());
+        aTableModel.setQuestions(new ArrayList<Question>());
         aTableModel.fireTableDataChanged();
     }
     
