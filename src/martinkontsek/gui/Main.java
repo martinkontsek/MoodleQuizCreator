@@ -17,7 +17,7 @@ public class Main extends javax.swing.JFrame
     public Main() {
         initComponents();
         aQuizCreator = new MoodleQuizCreator(this);
-        
+        this.setLocationRelativeTo(this);
     }
     
     public JTable getQuestionsTable()
@@ -42,16 +42,17 @@ public class Main extends javax.swing.JFrame
         btnExportQue = new javax.swing.JButton();
         btnEditQue = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        mnFile = new javax.swing.JMenu();
         miSelectQuiz = new javax.swing.JMenuItem();
         miNewQuiz = new javax.swing.JMenuItem();
         miRemoveQuiz = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        mnQuiz = new javax.swing.JMenu();
+        miNewQue = new javax.swing.JMenuItem();
+        miEditQue = new javax.swing.JMenuItem();
+        miRemoveQue = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        miEditQuizName = new javax.swing.JMenuItem();
+        miExport = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Moodle Quiz Creator");
@@ -124,7 +125,7 @@ public class Main extends javax.swing.JFrame
                 .addContainerGap(152, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("File");
+        mnFile.setText("File");
 
         miSelectQuiz.setText("Select Quiz");
         miSelectQuiz.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +133,7 @@ public class Main extends javax.swing.JFrame
                 miSelectQuizActionPerformed(evt);
             }
         });
-        jMenu1.add(miSelectQuiz);
+        mnFile.add(miSelectQuiz);
 
         miNewQuiz.setText("New Quiz");
         miNewQuiz.addActionListener(new java.awt.event.ActionListener() {
@@ -140,29 +141,67 @@ public class Main extends javax.swing.JFrame
                 miNewQuizActionPerformed(evt);
             }
         });
-        jMenu1.add(miNewQuiz);
+        mnFile.add(miNewQuiz);
 
         miRemoveQuiz.setText("Remove Quiz");
-        jMenu1.add(miRemoveQuiz);
+        miRemoveQuiz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRemoveQuizActionPerformed(evt);
+            }
+        });
+        mnFile.add(miRemoveQuiz);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(mnFile);
 
-        jMenu2.setText("Quiz");
+        mnQuiz.setText("Quiz");
+        mnQuiz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnQuizActionPerformed(evt);
+            }
+        });
 
-        jMenuItem4.setText("New Question");
-        jMenu2.add(jMenuItem4);
+        miNewQue.setText("New Question");
+        miNewQue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miNewQueActionPerformed(evt);
+            }
+        });
+        mnQuiz.add(miNewQue);
 
-        jMenuItem5.setText("Edit Question");
-        jMenu2.add(jMenuItem5);
+        miEditQue.setText("Edit Question");
+        miEditQue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miEditQueActionPerformed(evt);
+            }
+        });
+        mnQuiz.add(miEditQue);
 
-        jMenuItem6.setText("Remove Question");
-        jMenu2.add(jMenuItem6);
-        jMenu2.add(jSeparator1);
+        miRemoveQue.setText("Remove Question");
+        miRemoveQue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRemoveQueActionPerformed(evt);
+            }
+        });
+        mnQuiz.add(miRemoveQue);
+        mnQuiz.add(jSeparator1);
 
-        jMenuItem7.setText("Edit Quiz Name");
-        jMenu2.add(jMenuItem7);
+        miEditQuizName.setText("Edit Quiz Name");
+        miEditQuizName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miEditQuizNameActionPerformed(evt);
+            }
+        });
+        mnQuiz.add(miEditQuizName);
 
-        jMenuBar1.add(jMenu2);
+        miExport.setText("Export to XML");
+        miExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miExportActionPerformed(evt);
+            }
+        });
+        mnQuiz.add(miExport);
+
+        jMenuBar1.add(mnQuiz);
 
         setJMenuBar(jMenuBar1);
 
@@ -197,7 +236,7 @@ public class Main extends javax.swing.JFrame
     }//GEN-LAST:event_btnExportQueActionPerformed
 
     private void btnRemoveSelQueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveSelQueActionPerformed
-        aQuizCreator.removeSelected();
+        aQuizCreator.removeSelectedQuestions();
     }//GEN-LAST:event_btnRemoveSelQueActionPerformed
 
     private void miSelectQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSelectQuizActionPerformed
@@ -207,6 +246,34 @@ public class Main extends javax.swing.JFrame
     private void miNewQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNewQuizActionPerformed
         aQuizCreator.addQuiz();
     }//GEN-LAST:event_miNewQuizActionPerformed
+
+    private void miRemoveQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoveQuizActionPerformed
+        aQuizCreator.removeQuiz();
+    }//GEN-LAST:event_miRemoveQuizActionPerformed
+
+    private void miEditQuizNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEditQuizNameActionPerformed
+        aQuizCreator.editQuizName();
+    }//GEN-LAST:event_miEditQuizNameActionPerformed
+
+    private void mnQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnQuizActionPerformed
+        
+    }//GEN-LAST:event_mnQuizActionPerformed
+
+    private void miEditQueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEditQueActionPerformed
+        aQuizCreator.editQuestion();
+    }//GEN-LAST:event_miEditQueActionPerformed
+
+    private void miRemoveQueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoveQueActionPerformed
+        aQuizCreator.removeSelectedQuestions();
+    }//GEN-LAST:event_miRemoveQueActionPerformed
+
+    private void miExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miExportActionPerformed
+        aQuizCreator.exportToXML();
+    }//GEN-LAST:event_miExportActionPerformed
+
+    private void miNewQueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNewQueActionPerformed
+        aQuizCreator.addQuestion();
+    }//GEN-LAST:event_miNewQueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,19 +315,20 @@ public class Main extends javax.swing.JFrame
     private javax.swing.JButton btnExportQue;
     private javax.swing.JButton btnNewQue;
     private javax.swing.JButton btnRemoveSelQue;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenuItem miEditQue;
+    private javax.swing.JMenuItem miEditQuizName;
+    private javax.swing.JMenuItem miExport;
+    private javax.swing.JMenuItem miNewQue;
     private javax.swing.JMenuItem miNewQuiz;
+    private javax.swing.JMenuItem miRemoveQue;
     private javax.swing.JMenuItem miRemoveQuiz;
     private javax.swing.JMenuItem miSelectQuiz;
+    private javax.swing.JMenu mnFile;
+    private javax.swing.JMenu mnQuiz;
     private javax.swing.JTable tabQuestions;
     // End of variables declaration//GEN-END:variables
 }

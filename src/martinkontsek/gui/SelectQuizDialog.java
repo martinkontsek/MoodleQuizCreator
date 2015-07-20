@@ -46,7 +46,6 @@ public class SelectQuizDialog extends javax.swing.JDialog
         jScrollPane1 = new javax.swing.JScrollPane();
         tabQuizzes = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        btnRemove = new javax.swing.JButton();
         btnSelect = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -77,13 +76,6 @@ public class SelectQuizDialog extends javax.swing.JDialog
         });
         jScrollPane1.setViewportView(tabQuizzes);
 
-        btnRemove.setText("Remove");
-        btnRemove.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoveActionPerformed(evt);
-            }
-        });
-
         btnSelect.setText("Select");
         btnSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,8 +89,6 @@ public class SelectQuizDialog extends javax.swing.JDialog
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRemove)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -106,9 +96,7 @@ public class SelectQuizDialog extends javax.swing.JDialog
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSelect)
-                    .addComponent(btnRemove))
+                .addComponent(btnSelect)
                 .addContainerGap())
         );
 
@@ -139,20 +127,9 @@ public class SelectQuizDialog extends javax.swing.JDialog
             this.dispose();
         }
     }//GEN-LAST:event_btnSelectActionPerformed
-
-    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        int selectedRow = tabQuizzes.getSelectedRow();
-        
-        if(selectedRow != -1)
-        {
-            aQuizzes.remove(selectedRow);
-            aTableModel.fireTableDataChanged();
-        }
-    }//GEN-LAST:event_btnRemoveActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnSelect;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

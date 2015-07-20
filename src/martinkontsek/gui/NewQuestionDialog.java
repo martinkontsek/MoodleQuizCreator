@@ -43,6 +43,7 @@ public class NewQuestionDialog extends javax.swing.JDialog
             
             this.loadValues();
             btnAddQuestion.setText("Save");
+            this.setTitle("Edit Question");
         } else {
             aQuestion = new Question();
             aEditing = false;

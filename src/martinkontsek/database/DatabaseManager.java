@@ -79,10 +79,20 @@ public class DatabaseManager
         return paQuiz;
     }
     
+    public Question storeQuestionWithAnswers(int paQuizID, Question paQuestion)
+    {
+        this.storeQuestion(paQuizID, paQuestion);
+        ArrayList<Answer> allAnswers = paQuestion.getAllAnswers();
+        for(Answer ans: allAnswers)
+            this.storeAnswer(paQuestion.getDBID(), ans);
+        
+        return paQuestion;
+    }
+    
     public Question storeQuestion(int paQuizID, Question paQuestion)
     {
         String expression = "INSERT INTO Question (id_quiz,type,name,text) "
-                + "VALUES('"+paQuizID+"','"+paQuestion.getQuestionType().toString()+"',"
+                + "VALUES('"+paQuizID+"','"+paQuestion.getQuestionType().name()+"',"
                 +"'"+paQuestion.getQuestionName()+"','"+paQuestion.getQuestionText()+"');";
         
         aDatabase.executeQuery(expression);
@@ -196,5 +206,68 @@ public class DatabaseManager
             aDatabase.disconnect();
             return null;
         }
+    }
+    
+    public void removeQuiz(int paQuizID)
+    {
+        this.removeAllQuestionsFromQuiz(paQuizID);
+        
+        String expression = "DELETE FROM Quiz WHERE id_quiz="+paQuizID+";";
+        aDatabase.executeQuery(expression);
+        aDatabase.disconnect();   
+    }
+        
+    public void removeAllQuestionsFromQuiz(int paQuizID)
+    {       
+        String expression = "DELETE FROM Answer WHERE id_question IN (SELECT id_question FROM Question WHERE id_quiz="+paQuizID+");";
+        aDatabase.executeQuery(expression);
+        aDatabase.disconnect();        
+        
+        expression = "DELETE FROM Question WHERE id_quiz="+paQuizID+";";
+        aDatabase.executeQuery(expression);
+        aDatabase.disconnect();       
+    }
+    
+    public void removeQuestion(int paQuestionID)
+    {
+        this.removeAllAnswersFromQuestion(paQuestionID);
+        
+        String expression = "DELETE FROM Question WHERE id_question="+paQuestionID+";";
+        aDatabase.executeQuery(expression);
+        aDatabase.disconnect();       
+    }
+    
+    public void removeAllAnswersFromQuestion(int paQuestionID)
+    {
+        String expression = "DELETE FROM Answer WHERE id_question="+paQuestionID+";";
+        aDatabase.executeQuery(expression);
+        aDatabase.disconnect();
+    }
+    
+    public void editQuizName(Quiz paQuiz)
+    {
+        int id = paQuiz.getDBID();
+        String name = paQuiz.getName();
+        
+        String expression = "UPDATE Quiz SET name='"+name+"' WHERE id_quiz="+id+";";
+        aDatabase.executeQuery(expression);
+        aDatabase.disconnect();
+    }
+    
+    public void editQuestion(Question paQuestion)
+    {
+        int id = paQuestion.getDBID();
+        String type = paQuestion.getQuestionType().name();
+        String name = paQuestion.getQuestionName();
+        String text = paQuestion.getQuestionText();
+        
+        String expression = "UPDATE Question SET type='"+type+"', name='"+name+"',"
+                +" text='"+text+"'  WHERE id_question="+id+";";
+        aDatabase.executeQuery(expression);
+        aDatabase.disconnect();
+                      
+        this.removeAllAnswersFromQuestion(id);
+        for(Answer ans: paQuestion.getAllAnswers())
+            this.storeAnswer(id, ans);
     }
 }
