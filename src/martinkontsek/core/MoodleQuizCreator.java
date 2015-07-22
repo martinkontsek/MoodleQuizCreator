@@ -32,7 +32,10 @@ public class MoodleQuizCreator
     {
         aMain = paMain;
         aDatabase = new DatabaseManager();
-        aQuizzes = null;
+        aQuizzes = aDatabase.getQuizzes();
+        if(aQuizzes == null)
+            aQuizzes = new ArrayList<Quiz>();
+        
         aSelectedQuiz = null;
         
         aQuestionsTable = aMain.getQuestionsTable();        
