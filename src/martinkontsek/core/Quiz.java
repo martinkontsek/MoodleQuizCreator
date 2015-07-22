@@ -10,8 +10,11 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import martinkontsek.database.DatabaseManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  *
@@ -19,19 +22,21 @@ import org.w3c.dom.Element;
  */
 public class Quiz 
 {
+    private DatabaseManager aDatabase;
     private String aName;
     private ArrayList<Question> aQuestions;
     
     private int aDBID;
 
-    public Quiz() 
+    public Quiz(DatabaseManager paDatabase) 
     {
+        aDatabase = paDatabase;
         aQuestions = new ArrayList<>();
     }
     
-    public Quiz(String paName) 
+    public Quiz(DatabaseManager paDatabase, String paName) 
     {
-        this();
+        this(paDatabase);
         this.aName = paName;
     }
 
@@ -52,7 +57,7 @@ public class Quiz
 
     public void addQuestion(Question paQuestion)
     {
-        aQuestions.add(paQuestion);
+        aQuestions.add(paQuestion);   
     }
     
     public Question addQuestion(QuestionTypeEnum paQuestionType)
@@ -80,6 +85,11 @@ public class Quiz
 
     public void saveToXML()
     {
+        this.saveToXML(aQuestions);
+    }
+    
+    public void saveToXML(ArrayList<Question> paQuestions)
+    {
         try {
  
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -91,7 +101,7 @@ public class Quiz
 		doc.appendChild(rootElement);
  
                 // question elements
-                for(Question fQuestion: aQuestions)
+                for(Question fQuestion: paQuestions)
                 {
                     Element question = doc.createElement("question");
                     rootElement.appendChild(question);                    
@@ -164,6 +174,71 @@ public class Quiz
 	  }
     }
     
+    public void readFromXML(File paXMLFile)
+    {
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(paXMLFile);
+            doc.getDocumentElement().normalize();
+            
+            NodeList nList = doc.getElementsByTagName("question");
+            
+            for (int i = 0; i < nList.getLength(); i++) 
+            {
+ 
+		Node nNode = nList.item(i);
+ 		 
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) 
+                {
+ 
+                    Element eElement = (Element) nNode;
+ 
+                    String type = eElement.getAttribute("type");
+                    if(type.equals("matching"))
+                        continue;
+                    
+                    String name = removeHTML(eElement.getElementsByTagName("name").item(0).getTextContent());
+                    String text = removeHTML(eElement.getElementsByTagName("questiontext").item(0).getTextContent());
+                    
+                    Question question = this.addQuestion(QuestionTypeEnum.parse(type));
+                    question.setQuestionName(name);
+                    question.setQuestionText(text);
+                    
+                    NodeList answers = eElement.getElementsByTagName("answer");
+                    
+                    for (int j = 0; j < answers.getLength(); j++) 
+                    {
+                        Node ansNode = answers.item(j);
+                        
+                        if (ansNode.getNodeType() == Node.ELEMENT_NODE) 
+                        {
+                            Element ansElement = (Element) ansNode;
+                            
+                            String fraction = ansElement.getAttribute("fraction");
+                            String ansText = removeHTML(ansElement.getElementsByTagName("text").item(0).getTextContent());
+                            float fracFloat = Float.valueOf(fraction);
+                            boolean isRight = (fracFloat > 0);
+                            
+                            question.addAnswer(isRight, ansText);
+                        }
+                    }
+			
+                    aDatabase.storeQuestionWithAnswers(this.getDBID(), question);
+		}
+	}
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    private String removeHTML(String paInput)
+    {        
+        String output = paInput.replaceAll("\\<[^>]*>","")
+                .replace("&nbsp;", "");
+        return output;
+    }
     
     
 }

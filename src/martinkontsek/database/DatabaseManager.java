@@ -128,7 +128,7 @@ public class DatabaseManager
             
             while(rs.next())
             {                
-                Quiz quiz = new Quiz(); 
+                Quiz quiz = new Quiz(this); 
                 quiz.setDBID(rs.getInt("id_quiz"));
                 quiz.setName(rs.getString("name"));                
                                 

@@ -53,6 +53,7 @@ public class Main extends javax.swing.JFrame
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         miEditQuizName = new javax.swing.JMenuItem();
         miExport = new javax.swing.JMenuItem();
+        miImport = new javax.swing.JMenuItem();
         mnHelp = new javax.swing.JMenu();
         miSources = new javax.swing.JMenuItem();
         miAbout = new javax.swing.JMenuItem();
@@ -112,7 +113,7 @@ public class Main extends javax.swing.JFrame
                     .addComponent(btnNewQue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnExportQue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEditQue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,6 +206,14 @@ public class Main extends javax.swing.JFrame
             }
         });
         mnQuiz.add(miExport);
+
+        miImport.setText("Import from XML");
+        miImport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miImportActionPerformed(evt);
+            }
+        });
+        mnQuiz.add(miImport);
 
         jMenuBar1.add(mnQuiz);
 
@@ -308,6 +317,10 @@ public class Main extends javax.swing.JFrame
         aQuizCreator.showSources();
     }//GEN-LAST:event_miSourcesActionPerformed
 
+    private void miImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miImportActionPerformed
+        aQuizCreator.importFromXML();
+    }//GEN-LAST:event_miImportActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -356,6 +369,7 @@ public class Main extends javax.swing.JFrame
     private javax.swing.JMenuItem miEditQue;
     private javax.swing.JMenuItem miEditQuizName;
     private javax.swing.JMenuItem miExport;
+    private javax.swing.JMenuItem miImport;
     private javax.swing.JMenuItem miNewQue;
     private javax.swing.JMenuItem miNewQuiz;
     private javax.swing.JMenuItem miRemoveQue;

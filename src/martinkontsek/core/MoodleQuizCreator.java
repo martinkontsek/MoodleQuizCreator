@@ -1,10 +1,13 @@
 package martinkontsek.core;
 
 import java.awt.Desktop;
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileFilter;
 import martinkontsek.database.DatabaseManager;
 import martinkontsek.gui.Main;
 import martinkontsek.gui.NewQuestionDialog;
@@ -77,7 +80,7 @@ public class MoodleQuizCreator
         
         if ((s != null) && (s.length() > 0)) 
         {
-            Quiz quiz = new Quiz(s);
+            Quiz quiz = new Quiz(aDatabase, s);
             aQuizzes.add(quiz);
             aDatabase.storeQuiz(quiz);
             selectQuizCallBack(quiz);
@@ -207,6 +210,65 @@ public class MoodleQuizCreator
         try {
             Desktop.getDesktop().browse(new URL(urlString).toURI());
         } catch (Exception e) {
+        }
+    }
+    
+    public void importFromXML()
+    {
+        if(aSelectedQuiz == null)
+            return;
+        
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fc.setMultiSelectionEnabled(false);
+        fc.setAcceptAllFileFilterUsed(false);
+        fc.addChoosableFileFilter(new FileFilter() {
+
+            @Override
+            public boolean accept(File f) 
+            {
+                if (f.isDirectory()) 
+                {
+                    return true;
+                }
+
+                String ext = null;
+                String s = f.getName();
+                int i = s.lastIndexOf('.');
+
+                if (i > 0 &&  i < s.length() - 1) 
+                {
+                    ext = s.substring(i+1).toLowerCase();
+                }
+                
+                if (ext != null) 
+                {
+                    if (ext.equals("xml")) 
+                    {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+
+                return false;
+            }
+
+            @Override
+            public String getDescription() 
+            {
+                return "XML file";
+            }
+        });
+        int returnVal = fc.showOpenDialog(aMain);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) 
+        {
+            File file = fc.getSelectedFile();        
+        
+            aSelectedQuiz.readFromXML(file);
+
+            aTableModel.fireTableDataChanged();
         }
     }
 }

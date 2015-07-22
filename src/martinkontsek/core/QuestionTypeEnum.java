@@ -22,5 +22,14 @@ public enum QuestionTypeEnum
         return aText;
     }
     
-    
+    public static QuestionTypeEnum parse(String paString)
+    {
+        QuestionTypeEnum[] values = QuestionTypeEnum.values();
+        for(int i=0; i<values.length; i++)
+        {
+            if(values[i].toString().equals(paString))
+                return values[i];
+        }
+        return null;
+    }
 }
