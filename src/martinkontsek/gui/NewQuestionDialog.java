@@ -61,6 +61,7 @@ public class NewQuestionDialog extends javax.swing.JDialog
     
     private void loadValues()
     {
+        cbQueType.setSelectedItem(aQuestion.getQuestionType());
         tfQueName.setText(aQuestion.getQuestionName());
         taQueText.setText(aQuestion.getQuestionText());
         

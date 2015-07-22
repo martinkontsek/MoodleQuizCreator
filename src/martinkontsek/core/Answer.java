@@ -56,7 +56,11 @@ public class Answer
             else
                 fractionRight = 100/paNumberOfRight;
             
-            float fractionWrong = 100/(paNumberOfAnswers - paNumberOfRight);
+            float fractionWrong;
+            if((paNumberOfAnswers - paNumberOfRight) == 0)
+                fractionWrong = 0;
+            else
+                fractionWrong = 100/(paNumberOfAnswers - paNumberOfRight);
             if(aIsRight)
                 aFraction = fractionRight;
             else
