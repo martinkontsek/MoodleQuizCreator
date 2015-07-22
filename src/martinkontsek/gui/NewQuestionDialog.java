@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package martinkontsek.gui;
 
 import javax.swing.DefaultComboBoxModel;
@@ -15,7 +10,7 @@ import martinkontsek.core.QuestionTypeEnum;
 
 /**
  *
- * @author Martin
+ * @author Martin Kontsek
  */
 public class NewQuestionDialog extends javax.swing.JDialog 
 {
