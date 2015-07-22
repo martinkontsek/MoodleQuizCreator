@@ -71,6 +71,20 @@ public class QuestionsTableModel extends AbstractTableModel
                 return null;
         }
     }
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) 
+    {
+        switch(columnIndex)
+        {
+            case 0:
+                return Integer.class;
+            case 3:
+                return Object.class;
+            default:
+                return String.class;
+        }
+    }
     
     
 }

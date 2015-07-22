@@ -44,6 +44,8 @@ public class MoodleQuizCreator
         aQuestionsTable.getColumnModel().getColumn(0).setResizable(false);
         aQuestionsTable.getColumnModel().getColumn(3).setMaxWidth(60);
         aQuestionsTable.getColumnModel().getColumn(3).setResizable(false);
+        
+        aQuestionsTable.setAutoCreateRowSorter(true);
     } 
     
     private void nullGUI()
@@ -147,6 +149,8 @@ public class MoodleQuizCreator
         if(selected == -1)
             return;
         
+        selected = aQuestionsTable.convertRowIndexToModel(selected);
+        
         Question selQue = aSelectedQuiz.getQuestions().get(selected);
         NewQuestionDialog newQuestion = new NewQuestionDialog(aMain, true, this, selQue);
         newQuestion.setLocationRelativeTo(aMain);
@@ -172,6 +176,13 @@ public class MoodleQuizCreator
         
         for(int i=(len-1); i >= 0; i--)
         {
+            selected[i] = aQuestionsTable.convertRowIndexToModel(selected[i]);
+        }
+        
+        for(int i=(len-1); i >= 0; i--)
+        {
+            if(selected[i] >= aSelectedQuiz.getQuestions().size())
+                continue;
             Question que = aSelectedQuiz.getQuestions().get(selected[i]);
             aDatabase.removeQuestion(que.getDBID());
             aSelectedQuiz.removeQuestion(selected[i]);            
