@@ -122,6 +122,8 @@ public class MoodleQuizCreator
         aDatabase.removeQuiz(aSelectedQuiz.getDBID());
         aQuizzes.remove(aSelectedQuiz);
         
+        aDatabase.compactDatabase();
+        
         this.nullGUI();
     }    
     
@@ -190,6 +192,9 @@ public class MoodleQuizCreator
             aDatabase.removeQuestion(que.getDBID());
             aSelectedQuiz.removeQuestion(selected[i]);            
         }
+        
+        if(len >= 10)
+            aDatabase.compactDatabase();
         
         aTableModel.fireTableDataChanged();
     }

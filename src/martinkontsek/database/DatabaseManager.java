@@ -265,4 +265,11 @@ public class DatabaseManager
         for(Answer ans: paQuestion.getAllAnswers())
             this.storeAnswer(id, ans);
     }
+    
+    public void compactDatabase()
+    {
+        String expression = "VACUUM;";
+        aDatabase.executeQuery(expression);
+        aDatabase.disconnect();
+    }
 }
