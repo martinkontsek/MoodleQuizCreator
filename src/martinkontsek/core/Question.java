@@ -97,6 +97,8 @@ public class Question
     public void removeAllAnswers()
     {
         aAnswers.clear();
+        aNumberOfAnswers = 0;
+        aNumberOfRight = 0;
     }
     
     public int getDBID() 
