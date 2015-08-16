@@ -1,6 +1,9 @@
 package martinkontsek.core;
 
 import java.awt.Desktop;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -18,7 +21,7 @@ import martinkontsek.gui.SelectQuizDialog;
  *
  * @author Martin Kontsek
  */
-public class MoodleQuizCreator 
+public class MoodleQuizCreator extends MouseAdapter
 {
     private Main aMain;    
     private ArrayList<Quiz> aQuizzes;
@@ -49,6 +52,8 @@ public class MoodleQuizCreator
         aQuestionsTable.getColumnModel().getColumn(3).setResizable(false);
         
         aQuestionsTable.setAutoCreateRowSorter(true);
+        
+        aQuestionsTable.addMouseListener(this);
     } 
     
     private void nullGUI()
@@ -288,6 +293,18 @@ public class MoodleQuizCreator
             aSelectedQuiz.readFromXML(file);
 
             aTableModel.fireTableDataChanged();
+        }
+    }
+    
+    @Override
+    public void mousePressed(MouseEvent me) 
+    {
+        JTable table =(JTable) me.getSource();
+        Point p = me.getPoint();
+        int row = table.rowAtPoint(p);
+        if (me.getClickCount() == 2) 
+        {
+            this.editQuestion();
         }
     }
 }
