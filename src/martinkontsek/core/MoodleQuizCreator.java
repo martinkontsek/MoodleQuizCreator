@@ -307,4 +307,11 @@ public class MoodleQuizCreator extends MouseAdapter
             this.editQuestion();
         }
     }
+    
+    public void exportToTXT()
+    {
+        if(aSelectedQuiz == null)
+            return;
+        aSelectedQuiz.saveToTxt();
+    }
 }

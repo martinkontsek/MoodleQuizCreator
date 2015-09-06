@@ -41,6 +41,7 @@ public class Main extends javax.swing.JFrame
         btnRemoveSelQue = new javax.swing.JButton();
         btnExportQue = new javax.swing.JButton();
         btnEditQue = new javax.swing.JButton();
+        btnExportTXT = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnFile = new javax.swing.JMenu();
         miSelectQuiz = new javax.swing.JMenuItem();
@@ -102,6 +103,13 @@ public class Main extends javax.swing.JFrame
             }
         });
 
+        btnExportTXT.setText("Export to TXT");
+        btnExportTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportTXTActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -112,7 +120,8 @@ public class Main extends javax.swing.JFrame
                     .addComponent(btnRemoveSelQue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnNewQue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnExportQue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEditQue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnEditQue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnExportTXT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -126,7 +135,9 @@ public class Main extends javax.swing.JFrame
                 .addComponent(btnRemoveSelQue)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExportQue)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExportTXT)
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         mnFile.setText("File");
@@ -321,6 +332,10 @@ public class Main extends javax.swing.JFrame
         aQuizCreator.importFromXML();
     }//GEN-LAST:event_miImportActionPerformed
 
+    private void btnExportTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportTXTActionPerformed
+        aQuizCreator.exportToTXT();
+    }//GEN-LAST:event_btnExportTXTActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -359,6 +374,7 @@ public class Main extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditQue;
     private javax.swing.JButton btnExportQue;
+    private javax.swing.JButton btnExportTXT;
     private javax.swing.JButton btnNewQue;
     private javax.swing.JButton btnRemoveSelQue;
     private javax.swing.JMenuBar jMenuBar1;

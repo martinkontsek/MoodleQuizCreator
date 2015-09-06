@@ -1,7 +1,11 @@
 package martinkontsek.core;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -238,6 +242,44 @@ public class Quiz
         String output = paInput.replaceAll("\\<[^>]*>","")
                 .replace("&nbsp;", "");
         return output;
+    }
+    
+    public void saveToTxt()
+    {
+        try {
+            PrintWriter out = new PrintWriter(new File(aName+".txt"));
+            
+            //print quiz name
+            out.println("Quiz name: "+aName);
+            out.println();
+            
+            //print questions
+            for(Question que: aQuestions)
+            {
+                out.println("Name: "+que.getQuestionName());
+                out.println("Text: "+que.getQuestionText());
+                
+                //print answers
+                for(Answer ans: que.getAllAnswers())
+                {
+                    if(ans.isRight())
+                        out.print(" ***");
+                    else
+                        out.print(" ");
+                    
+                    out.println(ans.getText());
+                }
+                
+                out.println();
+                out.println();
+            }
+                    
+            
+            out.close();
+            
+        } catch (FileNotFoundException ex) {
+            
+        }        
     }
     
     
